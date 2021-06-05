@@ -11,3 +11,4 @@ urlpatterns = [
     
     path('verify-otp/' , VerifyOtp.as_view())
 ]
+

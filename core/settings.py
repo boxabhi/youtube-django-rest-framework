@@ -26,10 +26,11 @@ SECRET_KEY = '0*n_n$7k4k=t+_*4&)z4gy+6_%!g84e90$dmu!9z(#t(b72ky0'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+#CORS_ALLOWED_ORIGINS  = ['http://localhost:3000/']
 
 AUTH_USER_MODEL = 'accounts.User'
 
-
+CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,11 +44,14 @@ INSTALLED_APPS = [
     'home',
     'rest_framework.authtoken',
     'accounts',
+     'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+        'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -159,8 +163,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+import os
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+STATICFILES_DIR = {
+    os.path.join(BASE_DIR , "public/static")
+}
+
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'public/static') 
+MEDIA_URL = '/media/'
+
+
+
 
 
 

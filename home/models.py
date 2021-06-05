@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import BLANK_CHOICE_DASH, TextField
 
 # Create your models here.
 
@@ -15,6 +16,9 @@ class Book(models.Model):
 class Student(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField(default=18)
+    address = models.TextField(null=True , blank=True)
     father_name = models.CharField(max_length=100)
     
+
+
     

@@ -1,3 +1,4 @@
+from home.helpers import save_pdf
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -5,9 +6,57 @@ from .models import *
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
+import datetime
 
-# def home(request):
-#     return render(request , 'home.html')
+
+from rest_framework import generics
+
+
+
+class StudentGeneric(generics.ListAPIView , generics.CreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+
+class StudentGeneric1(generics.UpdateAPIView , generics.DestroyAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+    lookup_field = 'id'
+
+
+
+class GeneratePdf(APIView):
+    def get(self , request):
+        student_objs = Student.objects.all()
+        params = {
+            'today' : datetime.date.today(),
+            'student_objs' : student_objs 
+        } 
+        file_name , status = save_pdf(params)
+
+        if not status:
+            return Response({'status' : 400})
+
+
+
+        return Response({'status' : 200 , 'path' : f'/media/{file_name}.pdf'})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @api_view(['GET'])
 def get_book(request):
     book_objs = Book.objects.all()
@@ -155,4 +204,17 @@ class StudentAPI(APIView):
     
     
     
-    
+django pdf generator | django generate pdf from html | django generate pdf from view | django generate pdf report | django generate pdf from model | django generate pdf from template | django generate pdf dynamically | django pdf creation | pdf generator for django | pdf generator in django | django generate pdf invoice | 
+
+django generate pdf from html,
+generate pdf from html in django,
+django create pdf from html,
+
+What you will learn - 
+    - How to generate dyamic PDF django
+    - Django generate pdf from html
+    - Django generate pdf from view
+    - How you can  generate pdf report 
+    - How you can  generate pdf from template
+    - How to generate pdf dynamically 
+    - How you can save PDF in django
